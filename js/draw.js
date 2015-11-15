@@ -93,11 +93,17 @@ $(function() {
     ctx.fill();
   }
 
-  function rect(x,y,w,h) {
+  function rect(x,y,w,h,a) {
+    ctx.save();
+
+
     ctx.beginPath();
-    ctx.rect(x,y,w,h);
+    ctx.translate( x+w/2, y+h/2 );
+    ctx.rotate(a*Math.PI/180);
+    ctx.rect(-w/2,-h/2,w,h);
     ctx.closePath();
     ctx.fill();
+    ctx.restore();
   }
 
   function clear() {
@@ -116,7 +122,7 @@ $(function() {
     ctx.strokeStyle = 'black';
     ctx.stroke();
     circle(x, y, 5);
-    rect(player.x, player.y, 10, 50);
+    rect(player.x, player.y, 10, 50, 20);
    
     if (x + dx > WIDTH || x + dx < 0)
       dx = -dx;
